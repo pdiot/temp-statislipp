@@ -1,0 +1,33 @@
+.noStatsContainer {
+  display: flex;
+  .sidePanelTwoParts {
+    width: 20%;
+    margin-top: 50px;
+  }
+  .mainPanelTwoParts {
+    width: 80%;
+  }
+  .mainPanelOnePart {
+    width: 100%;
+  }
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  .gamesPanel {
+    @media (min-width : 2000px) {
+      width: 87%;
+      height: 8em;
+    }
+    @media (max-width : 1999px) {
+      width: 90%;
+      height: 150px;
+    }
+    margin: auto;
+    overflow-y: scroll;
+  }
+  .statsPanel {
+    width: 100%;
+  }
+}

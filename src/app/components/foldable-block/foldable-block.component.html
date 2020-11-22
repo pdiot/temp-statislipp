@@ -1,0 +1,11 @@
+<div class="wrap-collabsible"> 
+  <div [ngClass]="{'toggled': toggled}"></div>
+  <label for="collapsible{{collapseId}}" class="lbl-toggle" (click)="toggleDisplay()">{{label}}</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <ng-container *ngIf="toggled">
+        <ng-content></ng-content>
+      </ng-container>
+    </div>
+  </div>
+</div>

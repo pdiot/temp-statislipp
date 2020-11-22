@@ -1,0 +1,11 @@
+<ng-container *ngIf="separator; then separatorBlock else normal"></ng-container>
+<ng-template #normal>
+  <div class="stat-line" [ngClass]="{'highlight': highlight}">
+    <div class="value-left">{{value1}}{{unit1 ? unit1 : ''}}</div>
+    <div [ngClass]="{'highlight': highlight, 'label': label}">{{label}}</div>
+    <div class="value-right">{{value2}}{{unit2 ? unit2 : ''}}</div>
+  </div>
+</ng-template>
+<ng-template #separatorBlock>
+  <div class="separator"></div>
+</ng-template>

@@ -1,0 +1,34 @@
+@use '../../../variables' as variables;
+
+.filesRow {
+  display: flex;
+  flex-direction: row;
+
+  .fileData {
+    margin-top: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    .fileButton {
+      font-size: 22px;
+      width: 30%;
+      padding-top: 0;
+    }
+
+    p {
+      width: 70%;
+      overflow: hidden;
+      direction: rtl;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.statsWrapper {
+  display: flex;
+  flex-direction: row;
+  app-stats-compare-display {
+    width: 100%;
+  }
+}

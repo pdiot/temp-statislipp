@@ -1,0 +1,523 @@
+@use './variables' as variables;
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ang-electron-primary: mat-palette($mat-indigo);
+$ang-electron-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ang-electron-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ang-electron-theme: mat-light-theme(
+  (
+    color: (
+      primary: $ang-electron-primary,
+      accent: $ang-electron-accent,
+      warn: $ang-electron-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ang-electron-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background: rgba(0, 0, 0, 0) radial-gradient(circle at center -30%, rgb(40, 97, 99), rgb(18, 16, 32)) repeat scroll 0%
+    0%;
+  color: variables.$white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.upload {
+  cursor: pointer;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  @media (min-width: 2000px) {
+    font-size: 2.5em;
+  }
+  @media (max-width: 1999px) {
+    font-size: 38px;
+  }
+}
+
+.selected {
+  box-shadow: none;
+  color: variables.$white;
+  background-color: variables.$lightGreen;
+  border-color: variables.$darkBorder;
+}
+
+.ignored {
+  box-shadow: none;
+  color: variables.$white;
+  background-color: variables.$lightRed;
+  border-color: variables.$darkBorder;
+}
+
+.filteredOut {
+  box-shadow: none;
+  color: variables.$white;
+  background-color: variables.$greyBG;
+  border-color: variables.$darkBorder;
+}
+
+.forcedIn {
+  box-shadow: none;
+  color: variables.$white;
+  background-color: variables.$darkGreen;
+  border-color: variables.$darkBorder;
+}
+
+.forcedOut {
+  box-shadow: none;
+  color: variables.$white;
+  background-color: variables.$darkRed;
+  border-color: variables.$darkBorder;
+}
+
+.tourHighlight {
+  z-index: 901;
+  position: relative;
+  border: 1px solid variables.$darkBorder;
+  box-shadow: 60px 0 120px #f0f, -60px 0 120px #0ff !important;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+// Overlay
+
+.my-overlay {
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  visibility: visible !important;
+  transition: visibility 0s, opacity 0.4s linear !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: wait !important;
+}
+
+.meter {
+  // Progress bar wrapper
+  height: 20px; /* Can be anything */
+  width: 400px;
+  position: relative;
+  background: variables.$bodyBG;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+  align-items: center;
+  justify-content: center;
+}
+
+.meter p {
+  color: variables.$white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  z-index: 1003;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+}
+
+.meter > span {
+  // Progress bar itself
+  display: block;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(43, 194, 83);
+  background-image: linear-gradient(center bottom, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%) !important;
+  box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3), inset 0 -2px 6px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.meter > span:after {
+  // Striping on the progress bar because we're fancy like this
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  z-index: 1002;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+}
+
+// FOLDABLE STUFF IN FOLDABLE-BLOCK.COMPONENT.SCSS
+
+// Floating menu in menu.component.scss
+
+.menu-button {
+  border: none;
+  background: none;
+  font-size: 44px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: variables.$orange;
+  cursor: pointer;
+}
+
+.menu-button:focus {
+  outline: none;
+}
+
+// Scrollbars
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(253, 253, 253, 0.514);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 6px rgba(253, 253, 253, 0.514);
+}
+
+// Buttons
+
+.fakeButton {
+  text-align: center;
+  height: fit-content;
+  border: variables.$white 1px solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Stats display
+
+.top-block {
+  display: flex;
+  flex-direction: row;
+
+  .left {
+    @media (min-width: 2000px) {
+      height: 65em;
+    }
+    @media (max-width: 1999px) {
+      height: 659px;
+    }
+    width: 15%;
+    position: relative;
+  }
+
+  .right {
+    @media (min-width: 2000px) {
+      height: 65em;
+    }
+    @media (max-width: 1999px) {
+      height: 659px;
+    }
+    width: 15%;
+    position: relative;
+  }
+
+  .portrait-left {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0) radial-gradient(circle at center -30%, rgb(245, 46, 46), transparent) repeat scroll 0%
+      0%;
+    .char-versus-picture {
+      background-position: 75% 50%;
+    }
+  }
+
+  .portrait-right {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0) radial-gradient(circle at center -30%, rgb(84, 99, 255), transparent) repeat scroll 0%
+      0%;
+    .char-versus-picture {
+      background-position: 25% 50%;
+    }
+  }
+
+  .char-versus-picture {
+    content: " ";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .stats-tabs {
+    width: 70%;
+
+    .tab-labels {
+      display: flex;
+      flex-direction: row;
+      @media (min-width: 2000px) {
+        height: 3.7em;
+      }
+
+      .label {
+        width: 20%;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.4rem;
+        cursor: pointer;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-in-out;
+      }
+
+      .label.active {
+        background: #0204045e;
+      }
+    }
+
+    .tab-contents {
+      background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(18, 16, 32), transparent, rgb(18, 16, 32)) repeat
+        scroll 0% 0%;
+
+      @media (min-width: 2000px) {
+        height: 61.3em;
+      }
+      @media (max-width: 1999px) {
+        height: 600px;
+      }
+      overflow-y: auto;
+
+      .content {
+        width: 90%;
+        margin: auto;
+
+        app-stats-line {
+          margin-top: 0.5rem;
+        }
+        app-stats-line:last-child {
+          .separator {
+            margin-bottom: 4rem;
+          }
+        }
+      }
+    }
+  }
+
+  .player-label-block {
+    width: 20%;
+    position: absolute;
+    
+    @media (min-width: 2000px) {
+      bottom: 4%;
+    }
+    @media (max-width: 1999px) {
+      bottom: 10%;
+    }
+    font-size: 1.6em;
+    color: variables.$white;
+
+    .highlight {
+      font-size: 150%;
+      font-weight: 800;
+      color: variables.$white;
+      background-color: variables.$greenBG;
+      text-align: center;
+      padding: 0.3em 0px;
+      font-size: 1.2em;
+      box-shadow: variables.$black 0.2em 0.2em 0.2em;
+      opacity: 1;
+      transition: opacity 0.1s ease-in-out 0s;
+      position: relative;
+    }
+    .action {
+      margin-top: -0.3rem;
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;
+      font-weight: 600;
+      color: variables.$black;
+      background-color: variables.$white;
+      text-align: center;
+      padding: 0.3em 0px;
+      font-size: 1.2em;
+      box-shadow: variables.$black 0.2em 0.2em 0.2em;
+      opacity: 1;
+      transition: opacity 0.1s ease-in-out 0s;
+      position: relative;
+      cursor: pointer;
+    }
+    .info {
+      margin-top: 0;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      font-weight: 100;
+      color: variables.$black;
+      background-color: variables.$white;
+      text-align: center;
+      padding: 0.3em 0px;
+      font-size: 0.6em;
+      box-shadow: variables.$black 0.2em 0.2em 0.2em;
+      opacity: 1;
+      transition: opacity 0.1s ease-in-out 0s;
+      position: relative;
+      cursor: pointer;
+    }
+  }
+  .left-side {
+    left: 0px;
+    margin-left: 2rem;
+  }
+  .right-side {
+    right: 0px;
+    margin-right: 2rem;
+  }
+}
+
+
+.action {
+  margin-top: -0.3rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  font-weight: 600;
+  color: variables.$black;
+  background-color: variables.$white;
+  text-align: center;
+  padding: 0.3em 0px;
+  font-size: 1.2em;
+  box-shadow: variables.$black 0.2em 0.2em 0.2em;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out 0s;
+  position: relative;
+  cursor: pointer;
+}
+
+.bottom-block {
+  margin-top: 1rem;
+
+  .stages-list {
+    margin: auto;
+    width: 55%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .stage {
+      height: 100%;
+      width: 155px;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      padding: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition-duration: 0.25s;
+      transition-timing-function: ease-in-out;
+
+      .name {
+        height: 25%;
+        font-size: 1.2em;
+        text-align: center;
+      }
+      img {
+        height: 75%;
+      }
+    }
+
+    .stage.active {
+      background: #57e9e95e;
+    }
+  }
+}
+
+.modale {
+  position: absolute;
+  max-width: 730px;
+  bottom: 10%;
+  right: 30px;
+  background-color: rgba(7, 24, 24, 0.808);
+  box-shadow: 0 0 6px black;
+
+  .characterModale {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    .characterPicture {
+      padding: 1rem;
+      img {
+        width: 200px;
+        height: 200px;
+      }
+      cursor: pointer;
+    }
+    .characterPicture:hover {
+      background-color: variables.$greenBG;
+    }
+  }
+}

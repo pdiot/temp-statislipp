@@ -1,0 +1,11 @@
+ERROR in ./node_modules/@slippi/slippi-js/dist/index.es.js
+Module not found: Error: Can't resolve 'fs' in 'PATH_TO_MY_APP\node_modules\@slippi\slippi-js\dist'
+
+ERROR in ./node_modules/@slippi/slippi-js/dist/index.es.js
+Module not found: Error: Can't resolve 'net' in 'PATH_TO_MY_APP\node_modules\@slippi\slippi-js\dist'
+
+ERROR in ./node_modules/@slippi/slippi-js/dist/index.es.js
+Module not found: Error: Can't resolve 'path' in 'PATH_TO_MY_APP\node_modules\@slippi\slippi-js\dist'
+
+ERROR in ./node_modules/@slippi/slippi-js/dist/index.es.js
+Module not found: Error: Can't resolve 'stream' in 'PATH_TO_MY_APP\node_modules\@slippi\slippi-js\dist'

@@ -1,0 +1,9 @@
+<div class="gameListWrapper">
+  <ng-container *ngIf="filteredEnrichedGameFiles && filteredEnrichedGameFiles.length > 0">
+    <div *ngFor="let game of filteredEnrichedGameFiles; let i = index" (click)="toggleGame(game.shortName)"
+      class="gameLineWrapper"
+      [ngClass]="{'selected': isActive(game.shortName), 'filteredOut': !isActive(game.shortName), 'left': isLeft(i)}">
+      <app-game-line [game]="game.enrichedGameFile"></app-game-line>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,38 @@
+<div class="my-overlay" *ngIf="showOverlay">
+  <div class="meter">
+    <p>{{statsCalculationProgress | number:'1.0-0'}} %</p>
+    <span [ngStyle]="{'width': statsCalculationProgress +'%'}"></span>
+  </div>
+</div>
+<app-app-tour></app-app-tour>
+<ng-container *ngIf="stats; then hasStats else hasNoStats">
+</ng-container>
+<ng-template #hasNoStats>
+  <div class="noStatsContainer">
+    <ng-container *ngIf="hasList; then twoPartDisplayNoStats else singlePartDisplayNoStats">
+    </ng-container>
+    <ng-template #twoPartDisplayNoStats>
+      <div class="sidePanelTwoParts">
+        <app-side-panel [enrichedGameFiles]="enrichedGameFiles"></app-side-panel>
+      </div>
+      <div class="mainPanelTwoParts">
+        <app-main-panel [enrichedGameFiles]="enrichedGameFiles" [filter]="filter"></app-main-panel>
+      </div>
+    </ng-template>
+    <ng-template #singlePartDisplayNoStats>
+      <div class="mainPanelOnePart">
+        <app-main-panel></app-main-panel>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>
+<ng-template #hasStats>
+  <div class="statsContainer">
+    <div class="gamesPanel" [ngClass]="{'tourHighlight': highlightGames}">
+      <app-side-panel [stats]="stats" [enrichedGameFiles]="enrichedGameFiles"></app-side-panel>
+    </div>
+    <div class="statsPanel">
+      <app-main-panel [stats]="stats" [selectedGames]="selectedGames"></app-main-panel>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,4 @@
+<div class="input-group" (drop)="onDrop($event)" (dragover)="onDrag($event)">
+    <label for="slp_uploads" class="custom-file-label">Drag files here or click to select</label>
+    <input type="file" accept=".slp" multiple  id="slp_uploads" name="slp_uploads" for="inputGroupFile01" (change)="onChange($event)">
+</div>

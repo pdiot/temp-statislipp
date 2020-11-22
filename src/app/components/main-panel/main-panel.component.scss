@@ -1,0 +1,35 @@
+.header-data-line {
+  display: flex;
+}
+
+.d40 {
+  width: 40%;
+}
+
+h1 {
+  width: 20%;
+}
+
+.d20 {
+  width: 20%;
+}
+
+.slippi-link {
+  width: 20%;
+  padding-top: 2em;
+  A {
+    img {
+      height: 100px;
+    }
+  }
+}
+
+.offset {
+  
+  @media (min-width : 2000px) {
+    margin-left: -32em;
+  }
+  @media (max-width : 1999px) {
+    margin-left: -384px;
+  }
+}

@@ -1,0 +1,31 @@
+<ng-container *ngIf="filteredGameFiles; then filteredDisplay else noFilterDisplay"></ng-container>
+<ng-template #filteredDisplay>
+  <div class="filteredDisplay">
+    <div *ngIf="filteredGameFiles && filteredGameFiles.length > 0 && notAllGamesFilteredOut; else noExistingGameDisplay">
+      <div class="generateStats fakeButton" (click)="generateStats()">Generate stats</div>
+      <div class="gameLinesContainer">
+        <ng-container *ngFor="let game of filteredGameFiles">
+          <app-game-line
+            [ngClass]="{'selected': isSelected(game), 'filteredOut': !isSelected(game), 'forcedIn': isForcedIn(game), 'forcedOut': isForcedOut(game)}"
+            (click)="toggleGame(game)" [game]="game">
+          </app-game-line>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <ng-template #noExistingGameDisplay>
+    <div class="noGames ignored">
+      <h1>NO MATCHING GAMES</h1>
+    </div>
+  </ng-template>
+</ng-template>
+<ng-template #noFilterDisplay>
+  <div class="noFilterDisplay">
+    <div *ngIf="enrichedGameFiles && enrichedGameFiles.length > 0" class="gameLinesContainer">
+      <div *ngFor="let game of enrichedGameFiles" class="filteredOut">
+        <app-game-line [game]="game">
+        </app-game-line>
+      </div>
+    </div>
+  </div>
+</ng-template>
